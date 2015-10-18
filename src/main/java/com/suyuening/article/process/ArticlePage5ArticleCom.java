@@ -14,12 +14,17 @@ public class ArticlePage5ArticleCom {
 	private static final String LIST_URL = "/wz/sanwen/youmei/";
 	private static final int BOOK_CHAPTER_SIZE = 5;
 	private static final int CHAPTER_ARTICLE_SIZE = 10;
-	
+	private static final String BOOK_NAME = "精彩美文卷八";
 	public static void main(String[] args) {
         String baseUrl = "http://www.5article.com";
 //        String realUrl = "/view/135427.html";
 //        String realUrl = "/view/132229.html";
-        String realUrl = "/view/131827.html";
+//        String realUrl = "/view/131827.html";
+//        String realUrl = "/view/131475.html";
+//        String realUrl = "/view/131159.html";
+//        String realUrl = "/view/130867.html";
+//        String realUrl = "/view/130565.html";
+        String realUrl = "/view/130298.html";
 
         ArticlePage page = ArticlePage.parsePageByUrl(baseUrl, realUrl);
         DocBookSection section = null;
@@ -29,6 +34,7 @@ public class ArticlePage5ArticleCom {
         DocBookChapter chapter = null;
         int articleZise = 1;
         int chapterIndex = 1;
+        int totalArticleCount = BOOK_CHAPTER_SIZE * CHAPTER_ARTICLE_SIZE;
         while(true) {
         	if (!ArticlePage.isPageExists(page)) {
         		System.out.println("Page not exists");
@@ -47,7 +53,8 @@ public class ArticlePage5ArticleCom {
         		chapters.add(chapter);
         		sections = Lists.newArrayList();
         	}
-
+            
+        	System.out.println(String.format("..........%d/%d..........", articleZise, totalArticleCount));
         	articleZise++;
         	
         	if (chapters.size() == BOOK_CHAPTER_SIZE) {
@@ -65,7 +72,7 @@ public class ArticlePage5ArticleCom {
         }
         
         List<String> dedicationParas = Lists.newArrayList("品精彩美文", "享快乐生活");
-		DocBook docBook = new DocBook("精彩美文卷三", "佚名", dedicationParas , chapters);
+		DocBook docBook = new DocBook(BOOK_NAME, "佚名", dedicationParas , chapters);
 		DocBookXmlGenerator.makeBookXml(docBook, "E:\\docbook\\bookxml");
 	}
 }

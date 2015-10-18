@@ -28,6 +28,7 @@ public final class DocBookXmlGenerator {
 		String bookName = docBook.getBookName();
 		String fullPath = getBookFullPath(bookName, outPath);
         writeXml(book, fullPath);
+        BookFixUtil.fixBookXml(fullPath);
         
         int index = 1;
         Element chapter = null;
@@ -36,6 +37,7 @@ public final class DocBookXmlGenerator {
         	chapter = createChapter(docBookChapter);
         	chapterName = getChapterFullPath(bookName, outPath, index++);
         	writeXml(chapter, chapterName);
+        	BookFixUtil.fixChapterXml(chapterName);
 		}
     }
 
@@ -77,9 +79,7 @@ public final class DocBookXmlGenerator {
     
     private static Element createChapter(DocBookChapter chapter) {
     	Element e = new Element("chapter");
-//    	e.setAttribute("xmlns", "http://docbook.org/ns/docbook");
     	e.setAttribute("version", "5.0");
-//    	e.setAttribute("xml:lang", "zh_cn");
     	e.addContent(createTitle(chapter.getTitle()));
 
     	for (DocBookSection section : chapter.getSections()) {
@@ -144,12 +144,20 @@ public final class DocBookXmlGenerator {
 		Format format = Format.getPrettyFormat();
 		// 输出xml文件；
 		XMLOutputter XMLOut = new XMLOutputter(format);
+		FileOutputStream out = null;
 		try {
-			XMLOut.output(doc, new FileOutputStream(outFile));
+			out = new FileOutputStream(outFile);
+			XMLOut.output(doc, out);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

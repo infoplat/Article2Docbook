@@ -72,7 +72,8 @@ public class ArticlePage {
 		if(StringUtil.isBlank(contentLine)) {
 			return contentLine;
 		}
-		return contentLine.trim();
+		
+		return contentLine.trim().replaceAll("　", "");
 	}
 	/**
 	 * 页面是否存在
