@@ -2,6 +2,7 @@ package com.suyuening.article.bean;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import org.jsoup.nodes.Document;
 
 import com.google.common.collect.Lists;
@@ -32,7 +33,8 @@ public class ArticlePage {
 		String url = String.format("%s%s", baseUrl, realUrl);
 		int tryTimes = 3;
 		Document doc = null;
-			
+		
+		content.add(url);
 		do {
 			try {
 				doc = Jsoup.connect(url).get();
@@ -44,7 +46,7 @@ public class ArticlePage {
 		}while (tryTimes>0);
 			
 		// 标题
-		title = doc.title();
+		title = editTitle(doc.title());
 		// 正文
 		Elements contentArticleDiv = doc.select("div[class=content article]");
 		Document docContent = Jsoup.parse(contentArticleDiv.html());
@@ -68,6 +70,15 @@ public class ArticlePage {
 		return new ArticlePage(title, content, realUrl, nextUrl);
 	}
 
+	/**
+	 * 编辑文字标题，去掉"_优美散文_精彩美文 "
+	 * @param title
+	 * @return
+	 */
+	private static String editTitle(String title) {
+		checkNotNull(title, "Title can't be null!");
+		return title.replace("_优美散文_精彩美文", "");
+	}
 	private static String getEditedContentLine(String contentLine) {
 		if(StringUtil.isBlank(contentLine)) {
 			return contentLine;
