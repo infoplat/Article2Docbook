@@ -3,27 +3,22 @@ package com.suyuening.article.bean;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.jsoup.nodes.Document;
 
 import com.google.common.collect.Lists;
+import com.suyuening.article.util.StringTools;
+
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.jsoup.Jsoup;
 
-public class ArticlePage {
-	private String title;
-	private List<String> contents;
-	private String currentUrl;
-	private String nextUrl;
+public class ArticlePage extends Page {
 	
 	private ArticlePage(String title, List<String> contents, String currentUrl,
 			String nextUrl) {
-		super();
-		this.title = title;
-		this.contents = contents;
-		this.currentUrl = currentUrl;
-		this.nextUrl = nextUrl;
+		super(title, contents, currentUrl, nextUrl);
 	}
 
 	public static ArticlePage parsePageByUrl(String baseUrl, String realUrl) {
@@ -79,65 +74,13 @@ public class ArticlePage {
 		checkNotNull(title, "Title can't be null!");
 		return title.replace("_优美散文_精彩美文", "");
 	}
+
 	private static String getEditedContentLine(String contentLine) {
-		if(StringUtil.isBlank(contentLine)) {
-			return contentLine;
+		String temp = StringTools.replaceBlank(contentLine);
+		if(StringUtil.isBlank(temp)) {
+			return temp;
 		}
-		
-		return contentLine.trim().replaceAll("　", "");
+		// 替换看着想空格，其实不是空格的特殊字符
+		return temp.replaceAll(" ", "");
 	}
-	/**
-	 * 页面是否存在
-	 * @param page
-	 * @return
-	 */
-	public static boolean isPageExists(ArticlePage page) {
-		return page != null ? true : false;
-	}
-
-	/**
-	 * 下一篇文章是否存在
-	 * @param page 页面
-	 * @param listUrl 返回列表页URL
-	 * @return
-	 */
-	public static boolean isNextUrlExists(ArticlePage page, String listUrl) {
-    	if (!StringUtil.isBlank(page.getNextUrl()) && !page.getNextUrl().equals(listUrl)) {
-    		return true;
-    	}
-    	return false;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public List<String> getContents() {
-		return contents;
-	}
-
-	public void setContents(List<String> contents) {
-		this.contents = contents;
-	}
-
-	public String getCurrentUrl() {
-		return currentUrl;
-	}
-
-	public void setCurrentUrl(String currentUrl) {
-		this.currentUrl = currentUrl;
-	}
-
-	public String getNextUrl() {
-		return nextUrl;
-	}
-
-	public void setNextUrl(String nextUrl) {
-		this.nextUrl = nextUrl;
-	}
-	
 }
