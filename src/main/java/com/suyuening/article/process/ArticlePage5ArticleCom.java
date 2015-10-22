@@ -12,9 +12,9 @@ import com.suyuening.article.util.DocBookXmlGenerator;
 public class ArticlePage5ArticleCom {
 	private static final String DOCBOOK_OUTPATH = "E:\\docbook\\bookxml";
 	private static final String LIST_URL = "/wz/sanwen/youmei/";
-	private static final int BOOK_CHAPTER_SIZE = 5;
-	private static final int CHAPTER_ARTICLE_SIZE = 10;
-	private static final String BOOK_NAME = "精彩美文卷十七";
+	private static final int BOOK_CHAPTER_SIZE = 10;
+	private static final int CHAPTER_ARTICLE_SIZE = 20;
+	private static final String BOOK_NAME = "精彩美文卷十八";
 	public static void main(String[] args) {
         String baseUrl = "http://www.5article.com";
 //        String realUrl = "/view/135427.html";
@@ -33,7 +33,8 @@ public class ArticlePage5ArticleCom {
 //        String realUrl = "/view/127453.html";
 //        String realUrl = "/view/126196.html";
 //        String realUrl = "/view/123609.html";
-        String realUrl = "/view/122922.html";
+//        String realUrl = "/view/122922.html";
+        String realUrl = "/view/122296.html";
 
         ArticlePage page = ArticlePage.parsePageByUrl(baseUrl, realUrl);
         DocBookSection section = null;
