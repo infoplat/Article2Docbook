@@ -2,8 +2,15 @@ package com.suyuening.article.bean;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import com.google.common.collect.Lists;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class DocBookChapter {
 	/** 章节标题 */
 	private String title;
@@ -16,18 +23,8 @@ public class DocBookChapter {
 		sections = Lists.newArrayList();
 	}
 
-	public DocBookChapter(String title, List<DocBookSection> sections) {
-		super();
-		this.title = title;
-		this.sections = sections;
-	}
-
 	public String getTitle() {
 		return title;
-	}
-
-	public List<DocBookSection> getSections() {
-		return sections;
 	}
 
 	public void addSection(DocBookSection section) {
