@@ -10,6 +10,7 @@ import com.suyuening.article.bean.DocBookSection;
 import com.suyuening.article.util.DocBookXmlGenerator;
 
 public class ArticlePage5ArticleCom {
+	private static final String DOCBOOK_OUTPATH = "E:\\docbook\\bookxml";
 	private static final String LIST_URL = "/wz/sanwen/youmei/";
 	private static final int BOOK_CHAPTER_SIZE = 5;
 	private static final int CHAPTER_ARTICLE_SIZE = 10;
@@ -78,6 +79,6 @@ public class ArticlePage5ArticleCom {
         
         List<String> dedicationParas = Lists.newArrayList("品精彩美文", "享快乐生活");
 		DocBook docBook = new DocBook(BOOK_NAME, "佚名", dedicationParas , chapters);
-		DocBookXmlGenerator.makeBookXml(docBook, "E:\\docbook\\bookxml");
+		DocBookXmlGenerator.makeBookXml(docBook, DOCBOOK_OUTPATH);
 	}
 }
