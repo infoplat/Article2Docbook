@@ -15,7 +15,7 @@ import com.suyuening.article.bean.DocBookSection;
 import com.suyuening.article.util.DocBookXmlGenerator;
 
 public class JsoupDemo {
-	private static final String URL = "http://www.5article.com//view/135420.html";
+	private static final String URL = "http://www.5article.com/view/126046.html";
 	
 	public static void main(String[] args) {
 		
@@ -28,12 +28,23 @@ public class JsoupDemo {
 			
 			// 正文
 			Elements contentArticleDiv = doc.select("div[class=content article]");
-			Document docContent = Jsoup.parse(contentArticleDiv.html());
-			Elements elementsContent = docContent.select("p");
-			for (Element element : elementsContent) {
-				section.addPara(element.text());
-			}
 			
+			List<String> replace = Lists.newArrayList("<br>", "<br >", "<br/>", "<br />");
+			
+			String contentHtml = contentArticleDiv.html().toLowerCase();
+			for (String oneElement : replace) {
+				contentHtml = contentHtml.replace(oneElement, ":_:_:");
+			}
+			Document docContent = Jsoup.parse(contentHtml);
+			System.out.println(docContent.text());
+//			Elements elementsContent = docContent.select("p");
+//			for (Element element : elementsContent) {
+//				section.addPara(element.text());
+//			}
+			String[] xx = docContent.text().split(":_:_:");
+			for (String string : xx) {
+				section.addPara(string);
+			}
 			section.printInfo();
 
 			// 下一篇文章

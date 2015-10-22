@@ -16,6 +16,9 @@ import org.jsoup.Jsoup;
 
 public class ArticlePage extends Page {
 	
+	private static final String SPLIT_STR = ":_:_:";
+	private static final List<String> REPLACE = Lists.newArrayList("<br>", "<br >", "<br/>", "<br />");
+	
 	private ArticlePage(String title, List<String> contents, String currentUrl,
 			String nextUrl) {
 		super(title, contents, currentUrl, nextUrl);
@@ -25,7 +28,7 @@ public class ArticlePage extends Page {
 		String title = null;
 		List<String> content = Lists.newArrayList();
 		String nextUrl = null;
-		String url = String.format("%s%s", baseUrl, realUrl);
+		String url = formatUrl(baseUrl, realUrl);
 		int tryTimes = 3;
 		Document doc = null;
 		
@@ -44,25 +47,51 @@ public class ArticlePage extends Page {
 		title = editTitle(doc.title());
 		// 正文
 		Elements contentArticleDiv = doc.select("div[class=content article]");
-		Document docContent = Jsoup.parse(contentArticleDiv.html());
+		String contentHtml = contentArticleDiv.html().toLowerCase();
+		
+		Document docContent = Jsoup.parse(contentHtml);
 		Elements elementsContent = docContent.select("p");
-		for (Element element : elementsContent) {
-			String contentLine = getEditedContentLine(element.text());
-			// 排除空行和空字符串行
-			if (!StringUtil.isBlank(contentLine)) {
-				content.add(element.text());
+		String contentFlag = null;
+		int size = elementsContent.size();
+		if (size > 3) {
+			contentFlag = "P";
+			for (Element element : elementsContent) {
+				String contentLine = getEditedContentLine(element.text());
+				// 排除空行和空字符串行
+				if (!StringUtil.isBlank(contentLine)) {
+					content.add(element.text());
+				}
+			}
+		} else {
+			contentFlag = "BR";
+			for (String oneElement : REPLACE) {
+				contentHtml = contentHtml.replace(oneElement, SPLIT_STR);
+			}
+			Document temp = Jsoup.parse(contentHtml);
+			String[] contentLines = temp.text().split(SPLIT_STR);
+			for (String line : contentLines) {
+				String tempLine = getEditedContentLine(line);
+				if (!StringUtil.isBlank(tempLine)) {
+					content.add(tempLine);
+				}
 			}
 		}
+
 		// 下一篇文章
 		Element contentNextDiv = doc.select("div[class=content-next")
 				.first();
 		Document docContentNext = Jsoup.parse(contentNextDiv.html());
 		Element contentNextUrl = docContentNext.select("a").first();
 		nextUrl = contentNextUrl.attr("href");
+		content.add(formatUrl(baseUrl, nextUrl));
 
-		System.out.println(String.format("currentUrl=%s", realUrl));
+		System.out.println(String.format("currentUrl=%s,contentFlag=%s", realUrl, contentFlag));
 		System.out.println(String.format("nextUrl=%s", nextUrl));
 		return new ArticlePage(title, content, realUrl, nextUrl);
+	}
+
+	private static String formatUrl(String baseUrl, String realUrl) {
+		return String.format("%s%s", baseUrl, realUrl);
 	}
 
 	/**
@@ -78,7 +107,7 @@ public class ArticlePage extends Page {
 	private static String getEditedContentLine(String contentLine) {
 		String temp = StringTools.replaceBlank(contentLine);
 		if(StringUtil.isBlank(temp)) {
-			return temp;
+			return "";
 		}
 		// 替换看着想空格，其实不是空格的特殊字符
 		return temp.replaceAll(" ", "");

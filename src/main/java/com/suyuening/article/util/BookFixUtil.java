@@ -26,9 +26,9 @@ public final class BookFixUtil {
 				line = line.replace("include", "xi:include");
 			}
 			outLines.add(line);
-			System.out.println(line);
 		}
 		FileUtil.writeFileFromList(outLines, bookXmlPath);
+		System.out.println(String.format("bookXmlPath=%s, fix ok", bookXmlPath));
     }
     
     /**
@@ -44,8 +44,8 @@ public final class BookFixUtil {
 				line = CHAPTER_ROOT;
 			}
 			outLines.add(line);
-			System.out.println(line);
 		}
 		FileUtil.writeFileFromList(outLines, chapterXmlPath);
+		System.out.println(String.format("chapterXmlPath=%s, fix ok", chapterXmlPath));
     }
 }
