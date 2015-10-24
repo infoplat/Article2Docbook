@@ -15,7 +15,7 @@ import com.suyuening.article.bean.DocBookSection;
 import com.suyuening.article.util.DocBookXmlGenerator;
 
 public class JsoupDemo {
-	private static final String URL = "http://www.5article.com/view/126046.html";
+	private static final String URL = "http://www.5article.com/view/121272.html";
 	
 	public static void main(String[] args) {
 		
