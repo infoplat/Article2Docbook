@@ -9,7 +9,7 @@ import com.suyuening.article.bean.DocBookChapter;
 import com.suyuening.article.bean.DocBookSection;
 import com.suyuening.article.util.DocBookXmlGenerator;
 
-public class ArticlePage5ArticleCom {
+public class ArticlePage5ArticleComSanWen {
 	private static final String DOCBOOK_OUTPATH = "E:\\docbook\\bookxml";
 	private static final String LIST_URL = "/wz/sanwen/youmei/";
 	private static final int BOOK_CHAPTER_SIZE = 10;

@@ -25,10 +25,17 @@ public class ArticlePage extends Page {
 	}
 
 	public static ArticlePage parsePageByUrl(String baseUrl, String realUrl) {
+		
+		checkNotNull(realUrl, "realUrl can't be null");
 		String title = null;
 		List<String> content = Lists.newArrayList();
 		String nextUrl = null;
-		String url = formatUrl(baseUrl, realUrl);
+		String url = null;
+		if (realUrl.contains("5article.com")) {
+			url = realUrl;
+		} else {
+			url = formatUrl(baseUrl, realUrl);
+		}
 		int tryTimes = 3;
 		Document doc = null;
 		
