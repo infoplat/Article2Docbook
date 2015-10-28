@@ -10,8 +10,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DocBook {
-    private String bookName;
-    private String authorName;
-    private List<String> dedicationParas;
+
+    private String               bookName;
+    private String               authorName;
+    private List<String>         dedicationParas;
     private List<DocBookChapter> chapters;
 }

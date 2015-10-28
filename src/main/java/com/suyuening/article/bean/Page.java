@@ -12,35 +12,33 @@ import org.jsoup.helper.StringUtil;
 @Setter
 @AllArgsConstructor
 public class Page {
-	protected String title;
-	protected List<String> contents;
-	protected String currentUrl;
-	protected String nextUrl;
 
-	/**
-	 * 页面是否存在
-	 * 
-	 * @param page
-	 * @return
-	 */
-	public static boolean isPageExists(ArticlePage page) {
-		return page != null ? true : false;
-	}
+    protected String       title;
+    protected List<String> contents;
+    protected String       currentUrl;
+    protected String       nextUrl;
 
-	/**
-	 * 下一篇文章是否存在
-	 * 
-	 * @param page
-	 *            页面
-	 * @param listUrl
-	 *            返回列表页URL
-	 * @return
-	 */
-	public static boolean isNextUrlExists(ArticlePage page, String listUrl) {
-		if (!StringUtil.isBlank(page.getNextUrl())
-				&& !page.getNextUrl().equals(listUrl)) {
-			return true;
-		}
-		return false;
-	}
+    /**
+     * 页面是否存在
+     * 
+     * @param page
+     * @return
+     */
+    public static boolean isPageExists(ArticlePage page) {
+        return page != null ? true : false;
+    }
+
+    /**
+     * 下一篇文章是否存在
+     * 
+     * @param page 页面
+     * @param listUrl 返回列表页URL
+     * @return
+     */
+    public static boolean isNextUrlExists(ArticlePage page, String listUrl) {
+        if (!StringUtil.isBlank(page.getNextUrl()) && !page.getNextUrl().equals(listUrl)) {
+            return true;
+        }
+        return false;
+    }
 }
