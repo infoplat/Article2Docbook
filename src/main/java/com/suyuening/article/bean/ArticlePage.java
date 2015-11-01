@@ -3,6 +3,7 @@ package com.suyuening.article.bean;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.Iterables.retainAll;
 
 import org.jsoup.nodes.Document;
 
@@ -62,11 +63,7 @@ public class ArticlePage extends Page {
         if (size > 3) {
             contentFlag = "P";
             for (Element element : elementsContent) {
-                String contentLine = getEditedContentLine(element.text());
-                // 排除空行和空字符串行
-                if (!StringUtil.isBlank(contentLine)) {
-                    content.add(element.text());
-                }
+                addContentLine(content, element.text());
             }
         } else {
             contentFlag = "BR";
@@ -76,10 +73,7 @@ public class ArticlePage extends Page {
             Document temp = Jsoup.parse(contentHtml);
             String[] contentLines = temp.text().split(SPLIT_STR);
             for (String line : contentLines) {
-                String tempLine = getEditedContentLine(line);
-                if (!StringUtil.isBlank(tempLine)) {
-                    content.add(tempLine);
-                }
+                addContentLine(content, line);
             }
         }
 
@@ -95,7 +89,24 @@ public class ArticlePage extends Page {
         return new ArticlePage(title, content, realUrl, nextUrl);
     }
 
+    private static void addContentLine(List<String> content, String contentLine) {
+        String line = getEditedContentLine(contentLine);
+        if (StringUtil.isBlank(line)) {
+            return;
+        }
+        if (line.contains("阅读全文") && line.contains("民间故事")) {
+            content.add(line.split("民间故事")[0]);
+            return;
+        }
+        content.add(line);
+    }
+
     private static String formatUrl(String baseUrl, String realUrl) {
+        checkNotNull(baseUrl, "baseUrl can't be null");
+        checkNotNull(realUrl, "realUrl can't be null");
+        if (realUrl.contains(baseUrl)) {
+            return realUrl;
+        }
         return String.format("%s%s", baseUrl, realUrl);
     }
 
