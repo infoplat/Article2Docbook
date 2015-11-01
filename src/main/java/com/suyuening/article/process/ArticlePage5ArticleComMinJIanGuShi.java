@@ -15,14 +15,14 @@ public class ArticlePage5ArticleComMinJIanGuShi {
     private static final String LIST_URL             = "/minjian/chuanshuo/";
     private static final int    BOOK_CHAPTER_SIZE    = 10;
     private static final int    CHAPTER_ARTICLE_SIZE = 30;
-    private static final String BOOK_NAME            = "民间故事四";
+    private static final String BOOK_NAME            = "民间故事一";
 
     public static void main(String[] args) {
         String baseUrl = "http://story.5article.com";
-        String realUrl = "/view/25173.html";
-//        String realUrl = "/view/25473.html";
-//        String realUrl = "/view/26037.html";
-        // String realUrl = "/view/26680.html";
+//        String realUrl = "/view/25173.html";  // 第四卷
+//        String realUrl = "/view/25473.html";  // 第三卷
+//        String realUrl = "/view/26037.html";  // 第二卷
+         String realUrl = "/view/26680.html"; // 第一卷
 
         ArticlePage page = ArticlePage.parsePageByUrl(baseUrl, realUrl);
         DocBookSection section = null;

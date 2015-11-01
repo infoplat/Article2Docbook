@@ -93,8 +93,11 @@ public class ArticlePage extends Page {
         if (StringUtil.isBlank(line)) {
             return;
         }
-        if (line.contains("阅读全文") && line.contains("民间故事")) {
+        if (line.contains("民间故事")) {
             content.add(line.split("民间故事")[0]);
+            return;
+        }
+        if (line.contains("阅读全文")) {
             return;
         }
         content.add(line);
