@@ -3,7 +3,6 @@ package com.suyuening.article.bean;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.collect.Iterables.retainAll;
 
 import org.jsoup.nodes.Document;
 
