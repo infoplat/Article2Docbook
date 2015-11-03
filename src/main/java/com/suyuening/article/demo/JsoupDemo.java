@@ -8,6 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Lists;
 import com.suyuening.article.bean.DocBook;
 import com.suyuening.article.bean.DocBookChapter;
@@ -17,9 +20,10 @@ import com.suyuening.article.util.DocBookXmlGenerator;
 public class JsoupDemo {
 
     private static final String URL = "http://www.5article.com/view/121272.html";
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsoupDemo.class);
     public static void main(String[] args) {
 
+        LOGGER.info("start");
         Document doc = null;
         try {
             doc = Jsoup.connect(URL).get();
@@ -63,5 +67,7 @@ public class JsoupDemo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        LOGGER.info("end");
     }
 }
