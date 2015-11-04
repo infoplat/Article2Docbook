@@ -2,9 +2,13 @@ package com.suyuening.article.util;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Lists;
 
 public final class BookFixUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DocBookXmlGenerator.class);
 
     private BookFixUtil(){
     }
@@ -31,7 +35,7 @@ public final class BookFixUtil {
             outLines.add(line);
         }
         FileUtil.writeFileFromList(outLines, bookXmlPath);
-        System.out.println(String.format("bookXmlPath=%s, fix ok", bookXmlPath));
+        LOGGER.info("bookXmlPath={}, fix ok", bookXmlPath);
     }
 
     /**
@@ -50,6 +54,6 @@ public final class BookFixUtil {
             outLines.add(line);
         }
         FileUtil.writeFileFromList(outLines, chapterXmlPath);
-        System.out.println(String.format("chapterXmlPath=%s, fix ok", chapterXmlPath));
+        LOGGER.info("chapterXmlPath={}, fix ok", chapterXmlPath);
     }
 }

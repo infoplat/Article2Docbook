@@ -11,6 +11,8 @@ import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.jsoup.helper.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.suyuening.article.bean.DocBook;
@@ -18,7 +20,8 @@ import com.suyuening.article.bean.DocBookChapter;
 import com.suyuening.article.bean.DocBookSection;
 
 public final class DocBookXmlGenerator {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(DocBookXmlGenerator.class);
+    
     private DocBookXmlGenerator(){
     }
 
@@ -52,7 +55,7 @@ public final class DocBookXmlGenerator {
 
     private static String getFullPath(String fileName, String outPath) {
         if (StringUtil.isBlank(outPath)) {
-            System.out.println("File Path is't exists!");
+            LOGGER.info("File Path is't exists!");
         }
 
         String separator = File.separator;

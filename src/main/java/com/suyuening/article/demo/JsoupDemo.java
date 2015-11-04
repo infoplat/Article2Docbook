@@ -41,11 +41,7 @@ public class JsoupDemo {
                 contentHtml = contentHtml.replace(oneElement, ":_:_:");
             }
             Document docContent = Jsoup.parse(contentHtml);
-            System.out.println(docContent.text());
-            // Elements elementsContent = docContent.select("p");
-            // for (Element element : elementsContent) {
-            // section.addPara(element.text());
-            // }
+            LOGGER.info("docContent html={}", docContent.text());
             String[] xx = docContent.text().split(":_:_:");
             for (String string : xx) {
                 section.addPara(string);
@@ -56,7 +52,7 @@ public class JsoupDemo {
             Element contentNextDiv = doc.select("div[class=content-next").first();
             Document docContentNext = Jsoup.parse(contentNextDiv.html());
             Element contentNextUrl = docContentNext.select("a").first();
-            System.out.println(contentNextUrl.attr("href"));
+            LOGGER.info("contentNextUrl={}", contentNextUrl.attr("href"));
 
             List<DocBookSection> sections = Lists.newArrayList(section);
             List<DocBookChapter> chapters = Lists.newArrayList(new DocBookChapter("散文集", sections));
