@@ -41,10 +41,18 @@ public class DocBookSection {
         paras.add(para);
     }
 
+    /**
+     * 一次添加多个段落到文章
+     * @param paraList 多个段落
+     */
     public void addMutiParas(List<String> paraList) {
-        for (String para : paraList) {
-            addPara(para);
+        if (paraList == null || paraList.size() == 0) {
+            return;
         }
+        if (paras == null) {
+            paras = Lists.newArrayList();
+        }
+        paras.addAll(paraList);
     }
 
     public void printInfo() {
