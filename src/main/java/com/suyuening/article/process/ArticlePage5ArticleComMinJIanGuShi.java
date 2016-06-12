@@ -11,7 +11,7 @@ import com.suyuening.article.util.DocBookXmlGenerator;
 
 public class ArticlePage5ArticleComMinJIanGuShi {
 
-    private static final String DOCBOOK_OUTPATH      = "E:\\docbook\\bookxml";
+    private static final String DOCBOOK_OUTPATH      = "F:\\syn\\docbook\\bookxml";
     private static final String LIST_URL             = "/minjian/chuanshuo/";
     private static final int    BOOK_CHAPTER_SIZE    = 10;
     private static final int    CHAPTER_ARTICLE_SIZE = 30;

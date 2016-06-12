@@ -35,7 +35,7 @@ public class Page {
      * @param listUrl 返回列表页URL
      * @return
      */
-    public static boolean isNextUrlExists(ArticlePage page, String listUrl) {
+    public static boolean isNextUrlExists(Page page, String listUrl) {
         if (!StringUtil.isBlank(page.getNextUrl()) && !page.getNextUrl().equals(listUrl)) {
             return true;
         }
