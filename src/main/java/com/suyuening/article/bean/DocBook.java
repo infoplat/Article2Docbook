@@ -11,8 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DocBook {
 
+    /** 书名 */
     private String               bookName;
+    /** 作者名 */
     private String               authorName;
+    /** 题词段落 */
     private List<String>         dedicationParas;
+    /** 章节 */
     private List<DocBookChapter> chapters;
 }
