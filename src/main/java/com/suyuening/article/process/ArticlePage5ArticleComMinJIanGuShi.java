@@ -22,7 +22,7 @@ public class ArticlePage5ArticleComMinJIanGuShi {
 //        String realUrl = "/view/25173.html";  // 第四卷
 //        String realUrl = "/view/25473.html";  // 第三卷
 //        String realUrl = "/view/26037.html";  // 第二卷
-         String realUrl = "/view/26680.html"; // 第一卷
+         String realUrl = "/view/26791.html"; // 第一卷
 
         ArticlePage page = ArticlePage.parsePageByUrl(baseUrl, realUrl);
         DocBookSection section = null;

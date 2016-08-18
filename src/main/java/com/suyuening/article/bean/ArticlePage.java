@@ -41,7 +41,7 @@ public class ArticlePage extends Page {
         content.add(url);
         do {
             try {
-                doc = Jsoup.connect(url).get();
+                doc = Jsoup.connect(url).userAgent("Mozilla").get();
             } catch (Exception e) {
                 tryTimes--;
                 continue;
@@ -78,9 +78,19 @@ public class ArticlePage extends Page {
 
         // 下一篇文章
         Element contentNextDiv = doc.select("div[class=content-next").first();
-        Document docContentNext = Jsoup.parse(contentNextDiv.html());
-        Element contentNextUrl = docContentNext.select("a").first();
-        nextUrl = contentNextUrl.attr("href");
+        Document docContentNext = null;
+        if (contentNextDiv != null) {
+        	docContentNext = Jsoup.parse(contentNextDiv.html());
+        }
+
+        Element contentNextUrl = null; 
+        if (docContentNext != null) {
+        	contentNextUrl = docContentNext.select("a").first();
+        }
+        
+        if (contentNextUrl != null) {
+        	nextUrl = contentNextUrl.attr("href");
+        }
         content.add(formatUrl(baseUrl, nextUrl));
 
         System.out.println(String.format("currentUrl=%s,contentFlag=%s", realUrl, contentFlag));

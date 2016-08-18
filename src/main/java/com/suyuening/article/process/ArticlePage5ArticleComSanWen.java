@@ -13,9 +13,9 @@ public class ArticlePage5ArticleComSanWen {
 
     private static final String DOCBOOK_OUTPATH      = "F:\\syn\\docbook\\bookxml";
     private static final String LIST_URL             = "/wz/sanwen/youmei/";
-    private static final int    BOOK_CHAPTER_SIZE    = 10;
-    private static final int    CHAPTER_ARTICLE_SIZE = 50;
-    private static final String BOOK_NAME            = "精彩美文卷二十";
+    private static final int    BOOK_CHAPTER_SIZE    = 1;
+    private static final int    CHAPTER_ARTICLE_SIZE = 1;
+    private static final String BOOK_NAME            = "精彩美文卷一";
 
     public static void main(String[] args) {
         String baseUrl = "http://www.5article.com";
