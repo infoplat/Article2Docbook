@@ -89,7 +89,13 @@ public final class DocBookXmlGenerator {
         e.addContent(createTitle(chapter.getTitle()));
 
         for (DocBookSection section : chapter.getSections()) {
-            e.addContent(createSection(section));
+        	if (section.getTitle() == null || "".equals(section.getTitle())) {
+        		continue;
+        	}
+        	if (section.getParas() == null || section.getParas().size() == 0) {
+        		continue;
+        	}
+			e.addContent(createSection(section));
         }
         return e;
     }
